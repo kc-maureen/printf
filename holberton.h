@@ -1,36 +1,30 @@
-#ifndef header_file
-#define header_file
+#ifndef PRINT_F
+#define PRINT_F
 
 #include <unistd.h>
-#include <stdio.h>
-#include <stdarg.h>
 #include <stdlib.h>
+#include <stdarg.h>
+
 /**
- * struct typeprint - create libraries
- * @typec: char
- * @fun: point void of lista
- * Description: struct
+ * struct convert - defines a structure for symbols and functions
+ * @sym: The operator
+ * @f: function associated
  */
-typedef struct typeprint
+struct convert
 {
-	char typec;
-	int (*fun)(va_list lista);
-} typedate;
-/*Second function for _printf */
-int opFunction(int cont, va_list list, typedate tipos[],
-const char *format);
-int printUnk(int i, int spaces, const char *format, int band);
-int _strcmp(char *s1, char *s2);
-int _putchar(char c);
+	char *sym;
+	int (*f)(va_list);
+};
+typedef struct convert conver_t;
+
+/* Main functions */
+int parser(const char *format, conver_t f_list[], va_list arg_list);
 int _printf(const char *format, ...);
-int printString(va_list lista);
-int printChar(va_list lista);
-int printDecimal(va_list lista);
-int printInteger(va_list lista);
-int printBinary(va_list lista);
-int printUnsigned(va_list lista);
-int printUnsignedDigit(unsigned int num, int *cont);
-int printOctal(va_list lista);
-int printDigitOctal(unsigned int num, int *cont);
-char *_littleBuffer(int size);
-#endif /* Libraries Printf abu-bkarr and tihtina58 */
+int _write_char(char);
+int print_char(va_list);
+int print_string(va_list);
+int print_percent(va_list);
+int print_integer(va_list);
+int print_number(va_list);
+
+#endif

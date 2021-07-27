@@ -1,44 +1,53 @@
 #include "holberton.h"
 #include <unistd.h>
 
-int _printf(const char *format, ...){
-int i,j, count =0;
-var_list ap;
-print_types[]={
-    {"c", print_c},
-    {"s", print_s},
-    {"d", print_d},
-    {"%", print_P},
-    {"i", print_d},
-    {NULL", NULL},
-    
-}
-if (format == NULL){
-return (-1);
-}
-var_start(ap, format);
-i=0;
-while(format != NULL && formart[i] != '\0'){
-    if(format[i]=="%"){
-        i++;
-        if(format[i]=="\0"){
-            return-1;
-        }
-        j=0;
-        while(print_types[j].fs) != NULL){
-            if(*(print_types[j].fs)==format[i])
-            {
-                count += print_types[j].f(ap);
-            }
-            j++;
-        }
-        i++;
-    }
-    if(format[i] i="%" && format[i] i= "\0"){
-        counter += _putchar(format[i]);
-        i++;
-    }
-}
-var_end(ap);
-return (count);
+/**
+* _printf - prints a string with functionality
+* @format: the string to print
+*
+* Return: 0 Always success
+*/
+
+int _printf(const char *format, ...)
+{
+	int i, j, counter = 0;
+	va_list ap;
+	pt_t types[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"d", print_d},
+		{"%", print_p},
+		{"i", print_d},
+		{NULL, NULL},
+	};
+	if (format == NULL)
+		return (-1);
+	va_start(ap, format);
+	i = 0;
+	while (format != NULL && format[i] != '\0')
+	{
+		if (format[i] == '%')
+		{
+			i++;
+			if (format[i] == '\0')
+			{
+				return (-1);
+			}
+			j = 0;
+			while (types[j].fs != NULL)
+			{
+				if (*(types[j].fs) == format[i])
+					counter += types[j].f(ap);
+				j++;
+			}
+			i++;
+		}
+		if (format[i] != '%' && format[i] != '\0')
+		{
+			counter += _putchar(format[i]);
+			i++;
+		}
+	}
+	va_end(ap);
+	return (counter);
 }
